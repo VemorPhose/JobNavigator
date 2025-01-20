@@ -5,7 +5,7 @@ import OpenAI from 'openai';
 import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
+dotenv.config();
 
 const token = process.env.OPENAI_API_KEY;
 const client = new OpenAI({
@@ -13,7 +13,7 @@ const client = new OpenAI({
   apiKey: token
 });
 
-async function getJobRecommendations(resumeText) {
+export async function getJobRecommendations(resumeText) {
   try {
     const response = await client.chat.completions.create({
       messages: [
@@ -25,13 +25,8 @@ async function getJobRecommendations(resumeText) {
       max_tokens: 4096,
       top_p: 1
     });
-
-    const outputText = response.choices[0].message.content;
-
-    fs.writeFileSync("C:\\Users\\shour\\Desktop\\JobNavigator\\client\\scripts\\job_suggestions.txt", outputText);
-    console.log('Response saved to job_suggestions.txt');
-
-    return outputText;
+    console.log('Model Response:', response.choices[0].message.content);
+    return response.choices[0].message.content;
   } catch (error) {
     console.error('Error interacting with the model:', error);
     throw error;
@@ -39,7 +34,7 @@ async function getJobRecommendations(resumeText) {
 }
 
 // Function to read the output file and query the database
-async function queryDatabaseForJobs() {
+export async function queryDatabaseForJobs() {
 
   const outputText = fs.readFileSync('job_suggestions.txt', 'utf-8');
   console.log('Model Response:', outputText);
@@ -80,19 +75,3 @@ function extractJobSuggestions(responseText) {
 
   return jobTitles;
 }
-
-async function main() {
-  const resumeText = fs.readFileSync("C:\\Users\\shour\\Desktop\\JobNavigator\\client\\scripts\\extracted_text.txt", 'utf-8');
-
-  try {
-    
-    await getJobRecommendations(resumeText);
-
-    
-    //await queryDatabaseForJobs();
-  } catch (err) {
-    console.error('Error during the process:', err);
-  }
-}
-
-main();

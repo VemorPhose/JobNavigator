@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const convertPdfToText = require('./scripts/pdf_to_txt.cjs');
+const { getJobRecommendations } = require('./scripts/script.js');
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -17,6 +18,16 @@ app.post('/api/convert', upload.single('file'), async (req, res) => {
     res.status(500).send(error.message);
   }
 });
+
+app.post('/api/recommendations', express.json(), async (req, res) => {
+    try {
+      const { resumeText } = req.body;
+      const recommendations = await getJobRecommendations(resumeText);
+      res.json({ recommendations });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
