@@ -2,11 +2,14 @@ import fs from 'fs';
 import pkg from 'pg';
 const { Client } = pkg;
 import OpenAI from 'openai';
-import { useNavigate } from "react-router-dom";
+import dotenv from 'dotenv';
+import path from 'path';
 
-const token = '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';  
+dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
+
+const token = process.env.OPENAI_API_KEY;
 const client = new OpenAI({
-  baseURL: "https://models.inference.ai.azure.com",
+  baseURL: process.env.OPENAI_BASE_URL,
   apiKey: token
 });
 
@@ -44,11 +47,11 @@ async function queryDatabaseForJobs() {
   const jobSuggestions = extractJobSuggestions(outputText);
 
   const dbClient = new Client({
-    user: 'yourUsername',
-    host: 'localhost',
-    database: 'jobsDB',
-    password: 'yourPassword',
-    port: 5432,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
   });
 
   await dbClient.connect();
@@ -79,7 +82,7 @@ function extractJobSuggestions(responseText) {
 }
 
 async function main() {
-  const resumeText = location.state?.text;
+  const resumeText = fs.readFileSync("C:\\Users\\shour\\Desktop\\JobNavigator\\client\\scripts\\extracted_text.txt", 'utf-8');
 
   try {
     
