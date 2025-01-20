@@ -73,15 +73,21 @@ function Home() {
           </div>
         </div>
       </main>
-      <div id="About" className="p-10 flex flex-col lg:flex-row items-center text-center justify-center rounded-lg shadow-sm" style={{backgroundColor: '#ffffff'}}>
-        <h1 className="text-6xl lg:text-7xl font-bold w-1/3">About Us</h1>
-        <p className="w-2/3 p-6 text-lg">
-          Job Navigator is a revolutionary platform that connects job seekers
-          and employers. With our cutting-edge technology, we help you find the
-          perfect job and build a strong professional network.
-        </p>
+      <div>
+        <div
+          id="About"
+          className="p-10 flex flex-col lg:flex-row items-center text-center justify-center rounded-lg shadow-sm"
+          style={{ backgroundColor: "#ffffff" }}
+        >
+          <h1 className="text-6xl lg:text-7xl font-bold w-1/3">About Us</h1>
+          <p className="w-2/3 p-6 text-lg">
+            Job Navigator is a revolutionary platform that connects job seekers
+            and employers. With our cutting-edge technology, we help you find
+            the perfect job and build a strong professional network.
+          </p>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }
