@@ -1,13 +1,44 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 function Home() {
-  const onDrop = useCallback((acceptedFiles) => {
-    // Handle the uploaded files here
-    console.log(acceptedFiles);
-  }, []);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const onDrop = useCallback(
+    async (acceptedFiles) => {
+      try {
+        setIsLoading(true);
+        const file = acceptedFiles[0];
+
+        // Create FormData to send file
+        const formData = new FormData();
+        formData.append("file", file);
+
+        // Send to conversion endpoint
+        const response = await fetch("/api/convert", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) throw new Error("Conversion failed");
+
+        const textResult = await response.text();
+
+        // Navigate to results with converted text
+        navigate("/results", { state: { text: textResult } });
+      } catch (error) {
+        console.error("Error processing file:", error);
+        alert("Failed to process file. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [navigate]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -58,7 +89,9 @@ function Home() {
             }`}
           >
             <input {...getInputProps()} />
-            {isDragActive ? (
+            {isLoading ? (
+              <p>Processing file...</p>
+            ) : isDragActive ? (
               <p className="text-center text-blue-500">
                 Drop your file here...
               </p>
