@@ -24,3 +24,51 @@ JobYatra is an AI-powered web application designed to simplify the job search pr
 - Advanced filtering by location, company, and salary range.  
 
 Empower your career search with **JobYatra**—where your skills meet opportunity.
+
+### **Getting Started**
+
+Follow these steps to set up JobYatra on your local machine:
+
+**Note:** Make sure you have Node.js and npm installed on your machine before starting the setup process.
+
+**1. Clone the Repository:**
+```bash
+git clone https://github.com/yourusername/JobYatra.git
+cd JobYatra
+```
+
+**2. Set Up Client:**
+```bash
+cd client
+npm install
+```
+
+**3. Set Up Server:**
+```bash
+cd ../server
+npm install
+```
+
+**4. Environment Configuration:**
+Create a `.env` file in the server directory with the following format:
+```bash
+[Please enter your .env format here]
+```
+
+**5. Run the Application:**
+
+Start the server:
+```bash
+cd server
+npm run dev
+```
+
+In a new terminal, start the client:
+```bash
+cd client
+npm run dev
+```
+
+The application should now be running on:
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:5000`
