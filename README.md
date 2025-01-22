@@ -1,7 +1,7 @@
-### **JobNavigator - AI-Powered Job Recommendation Platform**  
+### **JobYatra - AI-Powered Job Recommendation Platform**  
 
 **Description:**  
-JobNavigator is an AI-powered web application designed to simplify the job search process by providing personalized job recommendations. Users can upload their resumes, and the platform intelligently analyzes their skills, experiences, and proficiencies. Leveraging web scraping and advanced NLP models, JobNavigator searches popular job posting websites and delivers curated job openings that align with the user's profile.  
+JobYatra is an AI-powered web application designed to simplify the job search process by providing personalized job recommendations. Users can upload their resumes, and the platform intelligently analyzes their skills, experiences, and proficiencies. Leveraging web scraping and advanced NLP models, JobYatra searches popular job posting websites and delivers curated job openings that align with the user's profile.  
 
 **Key Features:**  
 - 📄 **Resume Analysis:** Extracts skills, experiences, and qualifications from uploaded resumes.  
@@ -12,10 +12,10 @@ JobNavigator is an AI-powered web application designed to simplify the job searc
 - 🚀 **User-Friendly Interface:** Clean and responsive web design for a seamless user experience.  
 
 **Tech Stack:**  
-- **Frontend:** React.js, Tailwind CSS/Material UI  
-- **Backend:** Python, FastAPI/Flask, BeautifulSoup/Scrapy  
+- **Frontend:** React.js, Tailwind CSS  
+- **Backend:** Node, Express, Python, BeautifulSoup/Scrapy  
 - **Machine Learning:** SpaCy, Scikit-learn, Transformers (Hugging Face)  
-- **Database:** MongoDB/PostgreSQL  
+- **Database:** PostgreSQL  
 - **Deployment:** Docker, Heroku/Vercel  
 
 **Future Enhancements:**  
@@ -23,4 +23,4 @@ JobNavigator is an AI-powered web application designed to simplify the job searc
 - Email notifications for new job matches.  
 - Advanced filtering by location, company, and salary range.  
 
-Empower your career search with **JobNavigator**—where your skills meet opportunity.
+Empower your career search with **JobYatra**—where your skills meet opportunity.
