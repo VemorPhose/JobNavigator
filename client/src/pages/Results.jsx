@@ -43,7 +43,7 @@ function Results() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow p-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto" style={{ color: "#523d35" }}>
           <h1 className="text-2xl font-bold mb-4">Converted Resume Text</h1>
           <div className="bg-white p-6 rounded-lg shadow whitespace-pre-wrap">
             {text}
