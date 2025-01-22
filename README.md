@@ -29,7 +29,7 @@ Empower your career search with **JobYatra**—where your skills meet opportunit
 
 Follow these steps to set up JobYatra on your local machine:
 
-**Note:** Make sure you have Node.js and npm installed on your machine before starting the setup process.
+**Note:** Make sure you have Node.js, npm and PostgreSQL installed on your machine before starting the setup process.
 
 **1. Clone the Repository:**
 ```bash
@@ -52,7 +52,13 @@ npm install
 **4. Environment Configuration:**
 Create a `.env` file in the server directory with the following format:
 ```bash
-[Please enter your .env format here]
+OPENAI_API_KEY={insert your api key here}
+OPENAI_BASE_URL={https://models.inference.ai.azure.com}
+DB_USER={your_db_username)
+DB_HOST={your_db_host/localhost}
+DB_NAME={your_db_name}
+DB_PASSWORD={your_db_password}
+DB_PORT={your_db_port/5432}
 ```
 
 **5. Run the Application:**
