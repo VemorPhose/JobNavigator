@@ -14,7 +14,7 @@ JobYatra is an AI-powered web application designed to simplify the job search pr
 **Tech Stack:**  
 - **Frontend:** React.js, Tailwind CSS  
 - **Backend:** Node, Express, Python, BeautifulSoup/Scrapy  
-- **Machine Learning:** SpaCy, Scikit-learn, Transformers (Hugging Face)  
+- **Machine Learning:** GPT-4o API 
 - **Database:** PostgreSQL  
 - **Deployment:** Docker, Heroku/Vercel  
 
