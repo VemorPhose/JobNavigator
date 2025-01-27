@@ -45,7 +45,7 @@ function Results() {
   }, [text]); // Remove recommendations from dependency array
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#ffffff', color: '#523d35' }}>
       <Header />
       <main className="flex-grow p-6">
         <div className="max-w-4xl mx-auto">
@@ -68,7 +68,7 @@ function Results() {
                   <h3 className="text-xl font-semibold mb-4">{roleData.role}</h3>
                   <div className="grid gap-4">
                     {roleData.listings.map((job, jobIndex) => (
-                      <div key={jobIndex} className="border p-4 rounded-lg">
+                      <div key={jobIndex} className="border p-4 rounded-lg" style={{ borderColor: '#523d35', backgroundColor: '#efefe9' }}>
                         <h4 className="font-bold">{job.title}</h4>
                         <p className="text-gray-600">{job.company}</p>
                         <p className="text-gray-500">{job.location}</p>
