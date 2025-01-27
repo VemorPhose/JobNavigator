@@ -1,11 +1,15 @@
 const express = require('express');
+const cors = require('cors')
 const multer = require('multer');
 const pool = require("./config/db");
 require("dotenv").config();
 const convertPdfToText = require('./scripts/pdf_to_txt.cjs');
 const { getJobRecommendations } = require('./scripts/script.js');
+const { scrapeLinkedIn } = require('./scripts/scraper.js');
 
 const app = express();
+app.use(cors());
+app.use(express.json());
 const upload = multer({ storage: multer.memoryStorage() });
 
 app.post('/api/convert', upload.single('file'), async (req, res) => {
@@ -22,14 +26,27 @@ app.post('/api/convert', upload.single('file'), async (req, res) => {
 });
 
 app.post('/api/recommendations', express.json(), async (req, res) => {
-    try {
-      const { resumeText } = req.body;
-      const recommendations = await getJobRecommendations(resumeText);
-      res.json({ recommendations });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+  try {
+    const { resumeText } = req.body;
+    const jobRoles = await getJobRecommendations(resumeText);
+    
+    // Get job listings for each role
+    const roles = jobRoles.split(',').map(role => role.trim());
+    const jobListings = [];
+    
+    for (const role of roles) {
+      const listings = await scrapeLinkedIn(role, 'India');
+      jobListings.push({ role, listings });
     }
-  });
+    console.log('Job Listings:', jobListings);
+    res.json({ 
+      recommendations: jobRoles,
+      jobListings 
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 

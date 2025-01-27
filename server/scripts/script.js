@@ -3,7 +3,6 @@ import pkg from 'pg';
 const { Client } = pkg;
 import OpenAI from 'openai';
 import dotenv from 'dotenv';
-import path from 'path';
 
 dotenv.config();
 
@@ -18,15 +17,15 @@ export async function getJobRecommendations(resumeText) {
     const response = await client.chat.completions.create({
       messages: [
         { role: "system", content: "You are a job recommendation assistant." },
-        { role: "user", content: `Here is the resume: ${resumeText}. Suggest possible jobs or internships. Only give 5 job/internship names, only generic job/internship title nothing else, like a csv file not a list` }
+        { role: "user", content: `Based on this resume: ${resumeText}, suggest exactly 3 most suitable job roles. Return only as comma-separated values without periods or extra text.` }
       ],
       model: "gpt-4o",  
       temperature: 1,
       max_tokens: 4096,
       top_p: 1
     });
-    console.log('Model Response:', response.choices[0].message.content);
-    return response.choices[0].message.content;
+    console.log('Model Response:', response.choices[0].message.content.trim());
+    return response.choices[0].message.content.trim();
   } catch (error) {
     console.error('Error interacting with the model:', error);
     throw error;

@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 
-async function scrapeLinkedIn(jobTitle, location) {
+export const scrapeLinkedIn = async (jobTitle, location) => {
     const searchUrl = `https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=${encodeURIComponent(jobTitle)}&location=${encodeURIComponent(location)}`;
 
     const browser = await puppeteer.launch({ headless: true });
@@ -26,10 +26,5 @@ async function scrapeLinkedIn(jobTitle, location) {
     await browser.close();
 
     console.log(jobListings);
+    return jobListings
 }
-
-// Example usage - Fetching job title and location dynamically
-const jobTitle = process.argv[2] || "Data Analyst";  // Change dynamically via command-line
-const location = process.argv[3] || "India";             // Change dynamically via command-line
-
-scrapeLinkedIn(jobTitle, location);
